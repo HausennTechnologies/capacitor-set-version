@@ -35,12 +35,17 @@
     "capacitor-set-version": "./bin/run"
   },
   "oclif": {
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-not-found"
+    ],
     "bin": "capacitor-set-version"
   },
   "dependencies": {
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.2",
+    "@oclif/plugin-not-found": "^1.2.4",
     "tslib": "^1.14.1"
   },
   "devDependencies": {
