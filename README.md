@@ -9,31 +9,46 @@ Write version number and build number for Android and iOS on ionic/capacitor pro
 [![License](https://img.shields.io/npm/l/capacitor-set-version.svg)](https://github.com/DKrepsky/capacitor-set-version/blob/master/package.json)
 
 <!-- toc -->
-
-- [Usage](#usage)
-- [Commands](#commands)
+* [capacitor-set-version](#capacitor-set-version)
+* [Usage](#usage)
+* [Commands](#commands)
 <!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
-
 ```sh-session
 $ npm install -g capacitor-set-version
 $ capacitor-set-version COMMAND
 running command...
 $ capacitor-set-version (-v|--version|version)
-capacitor-set-version/1.0.0 linux-x64 node-v12.22.0
+capacitor-set-version/1.0.0 linux-x64 node-v14.16.0
 $ capacitor-set-version --help [COMMAND]
 USAGE
   $ capacitor-set-version COMMAND
 ...
 ```
-
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
+* [`capacitor-set-version help [COMMAND]`](#capacitor-set-version-help-command)
 
+## `capacitor-set-version help [COMMAND]`
+
+display help for capacitor-set-version
+
+```
+USAGE
+  $ capacitor-set-version help [COMMAND]
+
+ARGUMENTS
+  COMMAND  command to show help for
+
+OPTIONS
+  --all  see all commands in CLI
+```
+
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2/src/commands/help.ts)_
 <!-- commandsstop -->
