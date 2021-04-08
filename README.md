@@ -19,7 +19,7 @@ $ npm install -g capacitor-set-version
 $ capacitor-set-version COMMAND
 running command...
 $ capacitor-set-version (-v|--version|version)
-capacitor-set-version/0.0.0 linux-x64 node-v14.16.0
+capacitor-set-version/1.0.0 linux-x64 node-v12.22.0
 $ capacitor-set-version --help [COMMAND]
 USAGE
   $ capacitor-set-version COMMAND
