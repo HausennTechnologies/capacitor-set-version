@@ -1,5 +1,4 @@
-capacitor-set-version
-=====================
+# capacitor-set-version
 
 Write version number and build number for Android and iOS on ionic/capacitor projects
 
@@ -10,11 +9,15 @@ Write version number and build number for Android and iOS on ionic/capacitor pro
 [![License](https://img.shields.io/npm/l/capacitor-set-version.svg)](https://github.com/DKrepsky/capacitor-set-version/blob/master/package.json)
 
 <!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
+
+- [Usage](#usage)
+- [Commands](#commands)
 <!-- tocstop -->
+
 # Usage
+
 <!-- usage -->
+
 ```sh-session
 $ npm install -g capacitor-set-version
 $ capacitor-set-version COMMAND
@@ -26,8 +29,11 @@ USAGE
   $ capacitor-set-version COMMAND
 ...
 ```
+
 <!-- usagestop -->
+
 # Commands
+
 <!-- commands -->
 
 <!-- commandsstop -->
