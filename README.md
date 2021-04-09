@@ -1,54 +1,64 @@
-# capacitor-set-version
+<h1 align="center" style="border-bottom: none;">capacitor-set-version</h1>
+<h3 align="center">Write version number and build number for Android and iOS on ionic/capacitor projects</h3>
+<br />
+<div align="center" style="margin-bottom: 3em">
+  <a href="https://npmjs.org/package/capacitor-set-version">
+    <img alt="Version" src="https://img.shields.io/npm/v/capacitor-set-version.svg">
+  </a>
+  <a href="https://github.com/HausennTechnologies/capacitor-set-version/actions/workflows/release.yml">
+    <img alt="Release" src="https://github.com/HausennTechnologies/capacitor-set-version/actions/workflows/release.yml/badge.svg?branch=master">
+  </a>
+  <a href="https://david-dm.org/HausennTechnologies/capacitor-set-version">
+    <img alt="Dependencies" src="https://david-dm.org/HausennTechnologies/capacitor-set-version/status.svg">
+  </a>
+  <a href="https://david-dm.org/HausennTechnologies/capacitor-set-version?type=dev">
+    <img alt="Dev Dependencies" src="https://david-dm.org/HausennTechnologies/capacitor-set-version/dev-status.svg">
+  </a>
+    <a href="https://npmjs.org/package/capacitor-set-version">
+    <img alt="Downloads per week" src="https://img.shields.io/npm/dw/capacitor-set-version.svg">
+  </a>
+    <a href="https://github.com/DKrepsky/capacitor-set-version/blob/master/package.json">
+    <img alt="License" src="https://img.shields.io/npm/l/capacitor-set-version.svg">
+  </a>
+</div>
 
-Write version number and build number for Android and iOS on ionic/capacitor projects
+<p align="center">
+Build With
+<br />
+<a href="https://oclif.io">
+    <img alt="oclif" src="https://img.shields.io/badge/cli-oclif-brightgreen.svg">
+  </a>
+  <a href="https://github.com/semantic-release/semantic-release">
+    <img alt="semantic release" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg">
+  </a>
+</p>
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Downloads/week](https://img.shields.io/npm/dw/capacitor-set-version.svg)](https://npmjs.org/package/capacitor-set-version)
-[![Version](https://img.shields.io/npm/v/capacitor-set-version.svg)](https://npmjs.org/package/capacitor-set-version)
-[![License](https://img.shields.io/npm/l/capacitor-set-version.svg)](https://github.com/DKrepsky/capacitor-set-version/blob/master/package.json)
+# Installation
 
-<!-- toc -->
-* [capacitor-set-version](#capacitor-set-version)
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
+Use with npx without install:
+
+```sh-session
+  npx capacitor-set-version [options] <version>
+```
+
+Or install globally with:
+
+```sh-session
+  npm i -g capacitor-set-version
+```
 
 # Usage
 
-<!-- usage -->
+## Examples
+
 ```sh-session
-$ npm install -g capacitor-set-version
-$ capacitor-set-version COMMAND
-running command...
-$ capacitor-set-version (-v|--version|version)
-capacitor-set-version/1.0.0 linux-x64 node-v14.16.0
-$ capacitor-set-version --help [COMMAND]
-USAGE
-  $ capacitor-set-version COMMAND
-...
-```
-<!-- usagestop -->
+// Set version to 1.2.3
+capacitor-set-version 1.2.3
 
-# Commands
+// Set version of project on folder ./my-app
+capacitor-set-version -d my-app 1.2.3
 
-<!-- commands -->
-* [`capacitor-set-version help [COMMAND]`](#capacitor-set-version-help-command)
-
-## `capacitor-set-version help [COMMAND]`
-
-display help for capacitor-set-version
+// Set version with specific build number for android
+capacitor-set-version -b 1546 1.2.3
 
 ```
-USAGE
-  $ capacitor-set-version help [COMMAND]
-
-ARGUMENTS
-  COMMAND  command to show help for
-
-OPTIONS
-  --all  see all commands in CLI
-```
-
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.2/src/commands/help.ts)_
-<!-- commandsstop -->
