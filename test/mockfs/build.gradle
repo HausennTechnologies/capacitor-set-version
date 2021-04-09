@@ -1,0 +1,8 @@
+apply plugin: 'com.android.application'
+
+android {
+    defaultConfig {
+        versionCode 8
+        versionName "0.0.7"
+    }
+}

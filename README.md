@@ -38,7 +38,7 @@ Build With
 Use with npx without install:
 
 ```sh-session
-  npx capacitor-set-version [options] [version]
+  npx capacitor-set-version [options] path
 ```
 
 install as a development dependency:
@@ -55,8 +55,8 @@ or install globally:
 
 # How it works
 
-By calling `capacitor-set-version` in your project root folder (where package.json is), Android and iOS app versions
-will be set to the package.json version. Also the Android build number will be incremented.
+Calling `capacitor-set-version` will set your Android and iOS app versions to package.json version.
+Also, Android build number will be incremented.
 
 You can pass the version number as an argument to set it manually.
 
@@ -64,12 +64,14 @@ You can pass the version number as an argument to set it manually.
 
 Flags bellow are used to change the default behavior.
 
-| Option    | Short form | Description              | Type                   |
-| --------- | ---------- | ------------------------ | ---------------------- |
-| --dir     | -d         | Change project directory | Semantic version x.x.x |
-| --build   | -b         | Android build number     | Integer greater than 0 |
-| --android | -a         | Android only             | Bool                   |
-| --ios     | -i         | iOS only                 | Bool                   |
+| Option    | Short form | Description               | Type                   |
+| --------- | ---------- | ------------------------- | ---------------------- |
+| --version | -v         | Set version number to use | Semantic version x.x.x |
+| --build   | -b         | Android build number      | Integer greater than 0 |
+| --android | -a         | Android only              |                        |
+| --ios     | -i         | iOS only                  |                        |
+| --info    | -m         | Info                      |                        |
+| --help    | -h         | Show help                 |                        |
 
 # Usage
 
@@ -77,16 +79,16 @@ Flags bellow are used to change the default behavior.
 
 ```sh-session
 // Set version to 1.2.3
-capacitor-set-version 1.2.3
+capacitor-set-version -v 1.2.3 ./
 
 // Set version of project on folder ./my-app
-capacitor-set-version -d my-app 1.2.3
+capacitor-set-version -v 1.2.3 ./my-app
 
-// Set version with specific build number for android
-capacitor-set-version -b 1546 1.2.3
+// Set android version with specific build number for android
+capacitor-set-version -a -b 1546 ./
 
 // Set iOS version only
-capacitor-set-version -i
+capacitor-set-version -i ./
 
 ```
 

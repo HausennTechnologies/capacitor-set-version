@@ -1,27 +1,47 @@
 import { Command, flags } from '@oclif/command';
+import * as semver from 'semver';
+import * as fs from 'fs';
+import * as utils from './utils';
 
 class CapacitorSetVersion extends Command {
   static description = 'Set Android and iOS app version for capacitorjs projects.';
 
   static flags = {
-    // add --version flag to show CLI version
-    version: flags.version({ char: 'v' }),
+    version: flags.string({ char: 'v' }),
+    build: flags.integer({ char: 'b' }),
+    android: flags.integer({ char: 'a' }),
+    ios: flags.integer({ char: 'i' }),
+    info: flags.integer({ char: 'm' }),
     help: flags.help({ char: 'h' }),
-    // flag with a value (-n, --name=VALUE)
-    name: flags.string({ char: 'n', description: 'name to print' }),
-    // flag with no value (-f, --force)
-    force: flags.boolean({ char: 'f' }),
   };
 
-  static args = [{ name: 'file' }];
+  static args = [{ name: 'dir' }];
 
   async run(): Promise<void> {
     const { args, flags } = this.parse(CapacitorSetVersion);
 
-    const name = flags.name ?? 'world';
-    this.log(`hello ${name} from ./src/index.ts`);
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`);
+    if (!args.dir) this.error('Project directory is required', { exit: 1 });
+    if (!fs.existsSync(args.dir)) this.error('Project directory does not exist', { exit: 1 });
+
+    const version = this.getVersion(args.dir, flags.version);
+
+    if (!version) {
+      this.error('Invalid version', { exit: 1 });
+    }
+
+    this.log('version: ' + version);
+
+    if (flags.android) {
+      const androidVersion = utils.getAndroidVersion({ dir: args.dir });
+      const androidBuild = utils.getAndroidCode({ dir: args.dir });
+    }
+  }
+
+  private getVersion(dir: string, version?: string): string | null {
+    if (version && semver.valid(version)) {
+      return version;
+    } else {
+      return utils.getProjectVersion({ dir });
     }
   }
 }

@@ -16,11 +16,11 @@
     "ionic"
   ],
   "scripts": {
-    "posttest": "eslint . --ext .ts --config .eslintrc",
+    "prepare": "husky install",
     "prepack": "rm -rf lib && tsc -b",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif-dev readme && git add README.md",
-    "prepare": "husky install"
+    "lint": "eslint . --ext .ts --config .eslintrc",
+    "version": "oclif-dev readme && git add README.md"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -46,6 +46,7 @@
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.2",
     "@oclif/plugin-not-found": "^1.2.4",
+    "semver": "^7.3.5",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
@@ -58,7 +59,10 @@
     "@semantic-release/github": "^7.2.1",
     "@types/chai": "^4.2.16",
     "@types/mocha": "^5.2.7",
+    "@types/mock-fs": "^4.13.0",
     "@types/node": "^10.17.56",
+    "@types/semver": "^7.3.4",
+    "@types/sinon-chai": "^3.2.5",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
     "chai": "^4.3.4",
@@ -67,9 +71,12 @@
     "eslint-plugin-prettier": "^3.3.1",
     "husky": "^6.0.0",
     "mocha": "^5.2.0",
+    "mock-fs": "^4.13.0",
     "nyc": "^14.1.1",
     "prettier": "^2.2.1",
     "semantic-release": "^17.4.2",
+    "sinon": "^10.0.1",
+    "sinon-chai": "^3.6.0",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.9"
   }
