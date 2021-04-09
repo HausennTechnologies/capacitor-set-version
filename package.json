@@ -46,7 +46,7 @@
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.2",
     "@oclif/plugin-not-found": "^1.2.4",
-    "tslib": "^1.14.1"
+    "tslib": "^2.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.1",
