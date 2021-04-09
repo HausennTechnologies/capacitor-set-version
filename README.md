@@ -41,7 +41,13 @@ Use with npx without install:
   npx capacitor-set-version [options] [version]
 ```
 
-Or install globally with:
+install as a development dependency:
+
+```sh-session
+  npm i -g capacitor-set-version
+```
+
+or install globally:
 
 ```sh-session
   npm i -g capacitor-set-version
