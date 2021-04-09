@@ -38,7 +38,7 @@ Build With
 Use with npx without install:
 
 ```sh-session
-  npx capacitor-set-version [options] <version>
+  npx capacitor-set-version [options] [version]
 ```
 
 Or install globally with:
@@ -46,6 +46,24 @@ Or install globally with:
 ```sh-session
   npm i -g capacitor-set-version
 ```
+
+# How it works
+
+By calling `capacitor-set-version` in your project root folder (where package.json is), Android and iOS app versions
+will be set to the package.json version. Also the Android build number will be incremented.
+
+You can pass the version number as an argument to set it manually.
+
+## Options
+
+Flags bellow are used to change the default behavior.
+
+| Option    | Short form | Description              | Type                   |
+| --------- | ---------- | ------------------------ | ---------------------- |
+| --dir     | -d         | Change project directory | Semantic version x.x.x |
+| --build   | -b         | Android build number     | Integer greater than 0 |
+| --android | -a         | Android only             | Bool                   |
+| --ios     | -i         | iOS only                 | Bool                   |
 
 # Usage
 
@@ -61,4 +79,13 @@ capacitor-set-version -d my-app 1.2.3
 // Set version with specific build number for android
 capacitor-set-version -b 1546 1.2.3
 
+// Set iOS version only
+capacitor-set-version -i
+
 ```
+
+<p align="center">
+  <a style="color: #7c7c7c; font-size: small; margin-top: 2em" href="https://www.hausenn.com.br">
+  Hausenn Technologies
+  </a>
+</p>
