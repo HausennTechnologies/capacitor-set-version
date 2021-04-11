@@ -41,7 +41,7 @@ describe('capacitor-set-version', () => {
       .do(() => cmd.run([path]))
       .it('should set android and ios to package version', ctx => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
-        const androidBuild = utils.getAndroidBuild({ dir: path });
+        const androidBuild = utils.getAndroidCode({ dir: path });
 
         expect(androidVerion).to.equal('0.0.7');
         expect(androidBuild).to.equal(8);
