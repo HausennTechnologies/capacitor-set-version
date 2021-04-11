@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect } from '@oclif/test';
 import { resolve } from 'path';
 import * as mockfs from 'mock-fs';
 
@@ -79,6 +79,28 @@ describe('capacitor-set-version', () => {
     it('should throw on set when dir is invalid', () => {
       expect(() => utils.setAndroidVersion({ dir: 'invalid', version: '' })).to.throw();
       expect(() => utils.setAndroidCode({ dir: 'invalid', code: 0 })).to.throw();
+    });
+  });
+
+  describe('ios', () => {
+    it('should get ios version', () => {
+      const version = utils.getIOSVersion({ dir: path });
+      expect(version).equals('1.0');
+    });
+
+    it('should set ios version', () => {
+      utils.setIOSVersion({ dir: path, version: '0.0.8' });
+      const version = utils.getIOSVersion({ dir: path });
+      expect(version).equals('0.0.8');
+    });
+
+    it('should return null when dir is invalid', () => {
+      const version = utils.getIOSVersion({ dir: 'invalid' });
+      expect(version).to.be.null;
+    });
+
+    it('should throw on set when dir is invalid', () => {
+      expect(() => utils.setIOSVersion({ dir: 'invalid', version: '' })).to.throw();
     });
   });
 });
