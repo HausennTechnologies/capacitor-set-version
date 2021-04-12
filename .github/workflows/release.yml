@@ -7,7 +7,7 @@ on:
       - beta
       - alpha
   pull_request:
-        branches:
+    branches:
       - master
       - beta
       - alpha
