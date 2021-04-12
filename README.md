@@ -17,7 +17,7 @@
     <a href="https://npmjs.org/package/capacitor-set-version">
     <img alt="Downloads per week" src="https://img.shields.io/npm/dw/capacitor-set-version.svg">
   </a>
-    <a href="https://github.com/DKrepsky/capacitor-set-version/blob/master/package.json">
+    <a href="https://github.com/HausennTechnologies/capacitor-set-version/blob/master/package.json">
     <img alt="License" src="https://img.shields.io/npm/l/capacitor-set-version.svg">
   </a>
 </div>
@@ -44,7 +44,7 @@ Use with npx without install:
 install as a development dependency:
 
 ```sh-session
-  npm i -g capacitor-set-version
+  npm i -D capacitor-set-version
 ```
 
 or install globally:
