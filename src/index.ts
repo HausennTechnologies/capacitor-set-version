@@ -12,24 +12,31 @@ class CapacitorSetVersion extends Command {
     build: flags.integer({ char: 'b' }),
     android: flags.boolean({ char: 'a' }),
     ios: flags.boolean({ char: 'i' }),
+    quiet: flags.boolean({ char: 'q' }),
     info: flags.version({ char: 'm' }),
     help: flags.help({ char: 'h' }),
   };
 
   static args = [{ name: 'dir' }];
 
+  private quiet = false;
+
   async run(): Promise<void> {
     const { args, flags } = this.parse(CapacitorSetVersion);
-
-    const dir = this.getDir(args);
-    const version = this.getVersion(dir, flags.version);
 
     if (!flags.android && !flags.ios) {
       flags.android = true;
       flags.ios = true;
     }
 
-    this.log('version: ' + version);
+    if (flags.quiet) {
+      this.quiet = true;
+    }
+
+    const dir = this.getDir(args);
+    const version = this.getVersion(dir, flags.version);
+
+    if (!this.quiet) this.log('version: ' + version);
 
     if (flags.android) {
       const androidVersion = utils.getAndroidVersion({ dir });
@@ -47,8 +54,10 @@ class CapacitorSetVersion extends Command {
 
       utils.setAndroidCode({ dir, code });
 
-      this.log(`Android version: ${androidVersion} -> ${version}`);
-      this.log(`Android code: ${androidCode} -> ${code}`);
+      if (!this.quiet) {
+        this.log(`Android version: ${androidVersion} -> ${version}`);
+        this.log(`Android code: ${androidCode} -> ${code}`);
+      }
     }
 
     if (flags.ios) {
@@ -60,10 +69,14 @@ class CapacitorSetVersion extends Command {
 
       utils.setIOSVersion({ dir, version });
 
-      this.log(`iOS version: ${iosVersion} -> ${version}`);
+      if (!this.quiet) {
+        this.log(`iOS version: ${iosVersion} -> ${version}`);
+      }
     }
 
-    this.log('Done!');
+    if (!this.quiet) {
+      this.log('Done!');
+    }
   }
 
   private getDir(args: { [name: string]: string }): string {

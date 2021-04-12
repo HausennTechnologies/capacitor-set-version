@@ -141,6 +141,15 @@ describe('capacitor-set-version', () => {
       });
   });
 
+  describe('when called with --quiet', () => {
+    test
+      .stdout()
+      .do(() => cmd.run(['-q', path]))
+      .it('shoud not print text', ctx => {
+        expect(ctx.stdout).to.be.empty;
+      });
+  });
+
   describe('when project directory is not specified', () => {
     test
       .do(() => cmd.run([]))
