@@ -8,4 +8,5 @@ updates:
       - "DKrepsky"
     target-branch: "beta"
     commit-message:
+      prefix: "build"
       include: "scope"
