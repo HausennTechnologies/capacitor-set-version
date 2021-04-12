@@ -1,3 +1,10 @@
+# [1.2.0-beta.1](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.1.0...v1.2.0-beta.1) (2021-04-12)
+
+
+### Features
+
+* quiet ([4dd7c32](https://github.com/HausennTechnologies/capacitor-set-version/commit/4dd7c326ae06c15d0c8ce3c1934676b92c2270e6))
+
 # [1.1.0](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.0.0...v1.1.0) (2021-04-12)
 
 
