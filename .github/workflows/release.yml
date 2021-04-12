@@ -5,6 +5,10 @@ on:
     branches:
       - master
       - beta
+  pull_request:
+    branches:
+      - master
+      - beta
 jobs:
   release:
     name: Release
