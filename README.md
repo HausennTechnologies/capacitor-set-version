@@ -70,6 +70,7 @@ Flags bellow are used to change the default behavior.
 | --build   | -b         | Android build number      | Integer greater than 0 |
 | --android | -a         | Android only              |                        |
 | --ios     | -i         | iOS only                  |                        |
+| --quiet   | -q         | Only print error messages |                        |
 | --info    | -m         | Info                      |                        |
 | --help    | -h         | Show help                 |                        |
 
