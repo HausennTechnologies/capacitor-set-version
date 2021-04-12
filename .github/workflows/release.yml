@@ -5,6 +5,12 @@ on:
     branches:
       - master
       - beta
+      - alpha
+  pull_request:
+    branches:
+      - master
+      - beta
+      - alpha
 jobs:
   release:
     name: Release
