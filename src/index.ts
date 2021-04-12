@@ -2,6 +2,7 @@ import { Command, flags } from '@oclif/command';
 import * as semver from 'semver';
 import * as fs from 'fs';
 import * as utils from './utils';
+import { ExitCode } from './exit-code';
 
 class CapacitorSetVersion extends Command {
   static description = 'Set Android and iOS app version for capacitorjs projects.';
@@ -9,9 +10,9 @@ class CapacitorSetVersion extends Command {
   static flags = {
     version: flags.string({ char: 'v' }),
     build: flags.integer({ char: 'b' }),
-    android: flags.integer({ char: 'a' }),
-    ios: flags.integer({ char: 'i' }),
-    info: flags.integer({ char: 'm' }),
+    android: flags.boolean({ char: 'a' }),
+    ios: flags.boolean({ char: 'i' }),
+    info: flags.version({ char: 'm' }),
     help: flags.help({ char: 'h' }),
   };
 
@@ -20,29 +21,71 @@ class CapacitorSetVersion extends Command {
   async run(): Promise<void> {
     const { args, flags } = this.parse(CapacitorSetVersion);
 
-    if (!args.dir) this.error('Project directory is required', { exit: 1 });
-    if (!fs.existsSync(args.dir)) this.error('Project directory does not exist', { exit: 1 });
+    const dir = this.getDir(args);
+    const version = this.getVersion(dir, flags.version);
 
-    const version = this.getVersion(args.dir, flags.version);
-
-    if (!version) {
-      this.error('Invalid version', { exit: 1 });
+    if (!flags.android && !flags.ios) {
+      flags.android = true;
+      flags.ios = true;
     }
 
     this.log('version: ' + version);
 
     if (flags.android) {
-      const androidVersion = utils.getAndroidVersion({ dir: args.dir });
-      const androidBuild = utils.getAndroidCode({ dir: args.dir });
+      const androidVersion = utils.getAndroidVersion({ dir });
+      const androidCode = utils.getAndroidCode({ dir });
+
+      if (!androidVersion || !androidCode) {
+        this.error(`Invalid android settings: ${androidVersion}:${androidCode}`, {
+          exit: ExitCode.ERROR_ANDROID,
+        });
+      }
+
+      utils.setAndroidVersion({ dir, version });
+
+      const code = flags.build ? flags.build : androidCode + 1;
+
+      utils.setAndroidCode({ dir, code });
+
+      this.log(`Android version: ${androidVersion} -> ${version}`);
+      this.log(`Android code: ${androidCode} -> ${code}`);
     }
+
+    if (flags.ios) {
+      const iosVersion = utils.getIOSVersion({ dir });
+
+      if (!iosVersion) {
+        this.error(`Invalid ios settings: ${iosVersion}`, { exit: ExitCode.ERROR_IOS });
+      }
+
+      utils.setIOSVersion({ dir, version });
+
+      this.log(`iOS version: ${iosVersion} -> ${version}`);
+    }
+
+    this.log('Done!');
   }
 
-  private getVersion(dir: string, version?: string): string | null {
-    if (version && semver.valid(version)) {
-      return version;
-    } else {
-      return utils.getProjectVersion({ dir });
+  private getDir(args: { [name: string]: string }): string {
+    if (!args.dir) {
+      this.error('Project directory is required', { exit: ExitCode.ERROR_PROJECT });
     }
+
+    if (!fs.existsSync(args.dir)) {
+      this.error('Project directory does not exist', { exit: ExitCode.ERROR_PROJECT });
+    }
+
+    return args.dir;
+  }
+
+  private getVersion(dir: string, version?: string): string {
+    const result = version ? version : utils.getProjectVersion({ dir });
+
+    if (!result || !semver.valid(result)) {
+      this.error(`Invalid version: ${version}`, { exit: ExitCode.ERROR_VERSION });
+    }
+
+    return result;
   }
 }
 
