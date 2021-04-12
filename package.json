@@ -59,7 +59,7 @@
     "@semantic-release/git": "^9.0.0",
     "@semantic-release/github": "^7.2.1",
     "@types/chai": "^4.2.16",
-    "@types/mocha": "^5.2.7",
+    "@types/mocha": "^8.2.2",
     "@types/mock-fs": "^4.13.0",
     "@types/node": "^10.17.56",
     "@types/plist": "^3.0.2",
