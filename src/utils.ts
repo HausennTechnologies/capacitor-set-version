@@ -30,7 +30,7 @@ export function setAndroidVersion(options: { dir: string; version: string }): vo
   fs.writeFileSync(options.dir + androidFile, result, 'utf-8');
 }
 
-export function getAndroidCode(options: { dir: string }): number | null {
+export function getAndroidBuild(options: { dir: string }): number | null {
   try {
     const file = fs.readFileSync(options.dir + androidFile, 'utf-8');
     const buid = file.split('versionCode ')[1].split('\n')[0];
@@ -40,9 +40,9 @@ export function getAndroidCode(options: { dir: string }): number | null {
   }
 }
 
-export function setAndroidCode(options: { dir: string; code: number }): void {
+export function setAndroidBuild(options: { dir: string; build: number }): void {
   const file = fs.readFileSync(options.dir + androidFile, 'utf-8');
-  const result = file.replace(/(.*(?:versionCode).*)/g, `        versionCode ${options.code}`);
+  const result = file.replace(/(.*(?:versionCode).*)/g, `        versionCode ${options.build}`);
   fs.writeFileSync(options.dir + androidFile, result, 'utf-8');
 }
 
