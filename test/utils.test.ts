@@ -58,13 +58,13 @@ describe('capacitor-set-version', () => {
     });
 
     it('should get android build', () => {
-      const build = utils.getAndroidCode({ dir: path });
+      const build = utils.getAndroidBuild({ dir: path });
       expect(build).equal(8);
     });
 
     it('should set android build', () => {
-      utils.setAndroidCode({ dir: path, code: 10 });
-      const build = utils.getAndroidCode({ dir: path });
+      utils.setAndroidBuild({ dir: path, build: 10 });
+      const build = utils.getAndroidBuild({ dir: path });
       expect(build).equals(10);
     });
 
@@ -72,13 +72,13 @@ describe('capacitor-set-version', () => {
       const version = utils.getAndroidVersion({ dir: 'invalid' });
       expect(version).to.be.null;
 
-      const build = utils.getAndroidCode({ dir: 'invalid' });
+      const build = utils.getAndroidBuild({ dir: 'invalid' });
       expect(build).to.be.null;
     });
 
     it('should throw on set when dir is invalid', () => {
       expect(() => utils.setAndroidVersion({ dir: 'invalid', version: '' })).to.throw();
-      expect(() => utils.setAndroidCode({ dir: 'invalid', code: 0 })).to.throw();
+      expect(() => utils.setAndroidBuild({ dir: 'invalid', build: 0 })).to.throw();
     });
   });
 
