@@ -8,13 +8,10 @@
   <a href="https://github.com/HausennTechnologies/capacitor-set-version/actions/workflows/release.yml">
     <img alt="Release" src="https://github.com/HausennTechnologies/capacitor-set-version/actions/workflows/release.yml/badge.svg?branch=master">
   </a>
-  <a href="https://david-dm.org/HausennTechnologies/capacitor-set-version">
-    <img alt="Dependencies" src="https://david-dm.org/HausennTechnologies/capacitor-set-version/status.svg">
+    <a href="https://github.com/HausennTechnologies/capacitor-set-version/actions/workflows/test.yml">
+    <img alt="Test" src="https://github.com/HausennTechnologies/capacitor-set-version/actions/workflows/test.yml/badge.svg?branch=master">
   </a>
-  <a href="https://david-dm.org/HausennTechnologies/capacitor-set-version?type=dev">
-    <img alt="Dev Dependencies" src="https://david-dm.org/HausennTechnologies/capacitor-set-version/dev-status.svg">
-  </a>
-    <a href="https://npmjs.org/package/capacitor-set-version">
+  <a href="https://npmjs.org/package/capacitor-set-version">
     <img alt="Downloads per week" src="https://img.shields.io/npm/dw/capacitor-set-version.svg">
   </a>
     <a href="https://github.com/HausennTechnologies/capacitor-set-version/blob/master/package.json">
