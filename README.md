@@ -63,15 +63,22 @@ If you want, you can specify both version and build number using options flags.
 
 Flags bellow are used to change the default behavior.
 
-| Option    | Short form | Description               | Type                   |
-| --------- | ---------- | ------------------------- | ---------------------- |
-| --version | -v         | Set version number to use | Semantic version x.x.x |
-| --build   | -b         | Android build number      | Integer greater than 0 |
-| --android | -a         | Android only              |                        |
-| --ios     | -i         | iOS only                  |                        |
-| --quiet   | -q         | Only print error messages |                        |
-| --info    | -m         | Info                      |                        |
-| --help    | -h         | Show help                 |                        |
+```
+USAGE
+  $ capacitor-set-version DIR
+
+ARGUMENTS
+  DIR  Capacitor project root directory
+
+OPTIONS
+  -a, --android        Android only
+  -b, --build=10       Set specific build
+  -h, --help           Show help
+  -i, --ios            iOS only
+  -m, --info           Print tool version
+  -q, --quiet          Print only error messages
+  -v, --version=x.x.x  Set specific version
+```
 
 # Usage
 
