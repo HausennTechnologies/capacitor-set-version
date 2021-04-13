@@ -40,7 +40,7 @@ class CapacitorSetVersion extends Command {
 
     if (flags.android) {
       const androidVersion = utils.getAndroidVersion({ dir });
-      const androidBuild = utils.getAndroidCode({ dir });
+      const androidBuild = utils.getAndroidBuild({ dir });
 
       if (!androidVersion || !androidBuild) {
         this.error(`Invalid android settings: ${androidVersion}:${androidBuild}`, {
@@ -52,7 +52,7 @@ class CapacitorSetVersion extends Command {
 
       const build = flags.build ? flags.build : androidBuild + 1;
 
-      utils.setAndroidCode({ dir, code: build });
+      utils.setAndroidBuild({ dir, build: build });
 
       if (!this.quiet) {
         this.log(`Android version: ${androidVersion} -> ${version}`);

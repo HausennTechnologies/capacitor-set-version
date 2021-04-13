@@ -62,7 +62,7 @@ describe('capacitor-set-version', () => {
       .do(() => cmd.run([path]))
       .it('should set android and ios to package version and increment android build', ctx => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
-        const androidBuild = utils.getAndroidCode({ dir: path });
+        const androidBuild = utils.getAndroidBuild({ dir: path });
         const iosVersion = utils.getIOSVersion({ dir: path });
 
         expect(androidVerion).to.equal('1.2.3');
@@ -79,7 +79,7 @@ describe('capacitor-set-version', () => {
       .do(() => cmd.run(['-v', '2.5.5', path]))
       .it('should set android and ios to --setversion and increment android build', ctx => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
-        const androidBuild = utils.getAndroidCode({ dir: path });
+        const androidBuild = utils.getAndroidBuild({ dir: path });
         const iosVersion = utils.getIOSVersion({ dir: path });
 
         expect(androidVerion).to.equal('2.5.5');
@@ -96,7 +96,7 @@ describe('capacitor-set-version', () => {
       .do(() => cmd.run(['-b', '10', path]))
       .it('shoud set android build number to specific number', ctx => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
-        const androidBuild = utils.getAndroidCode({ dir: path });
+        const androidBuild = utils.getAndroidBuild({ dir: path });
         const iosVersion = utils.getIOSVersion({ dir: path });
 
         expect(androidVerion).to.equal('1.2.3');
@@ -113,7 +113,7 @@ describe('capacitor-set-version', () => {
       .do(() => cmd.run(['-a', path]))
       .it('shoud set android version only', ctx => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
-        const androidBuild = utils.getAndroidCode({ dir: path });
+        const androidBuild = utils.getAndroidBuild({ dir: path });
         const iosVersion = utils.getIOSVersion({ dir: path });
 
         expect(androidVerion).to.equal('1.2.3');
@@ -130,7 +130,7 @@ describe('capacitor-set-version', () => {
       .do(() => cmd.run(['-i', path]))
       .it('shoud set ios version only', ctx => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
-        const androidBuild = utils.getAndroidCode({ dir: path });
+        const androidBuild = utils.getAndroidBuild({ dir: path });
         const iosVersion = utils.getIOSVersion({ dir: path });
 
         expect(androidVerion).to.equal('0.0.7');
