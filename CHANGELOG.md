@@ -1,5 +1,12 @@
 CHANGES:
 
+# [1.3.0](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.2.2...v1.3.0) (2021-04-13)
+
+
+### Features
+
+* set ios build\n\nBREAKING CHANGE: previous ios build numbers will fail ([f635a0c](https://github.com/HausennTechnologies/capacitor-set-version/commit/f635a0c08ed78bc09dca8c4f3515423e9f0af769))
+
 ## [1.2.2](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.2.1...v1.2.2) (2021-04-13)
 
 ## [1.2.1](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.2.0...v1.2.1) (2021-04-13)
