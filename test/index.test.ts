@@ -60,7 +60,7 @@ describe('capacitor-set-version', () => {
     test
       .stdout()
       .do(() => cmd.run([path]))
-      .it('should set android and ios to package version and increment android code', ctx => {
+      .it('should set android and ios to package version and increment android build', ctx => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
         const androidBuild = utils.getAndroidCode({ dir: path });
         const iosVersion = utils.getIOSVersion({ dir: path });
@@ -77,7 +77,7 @@ describe('capacitor-set-version', () => {
     test
       .stdout()
       .do(() => cmd.run(['-v', '2.5.5', path]))
-      .it('should set android and ios to --setversion and increment android code', ctx => {
+      .it('should set android and ios to --setversion and increment android build', ctx => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
         const androidBuild = utils.getAndroidCode({ dir: path });
         const iosVersion = utils.getIOSVersion({ dir: path });
