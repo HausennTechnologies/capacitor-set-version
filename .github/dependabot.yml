@@ -1,12 +1,10 @@
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: 'npm' # See documentation for possible values
+    directory: '/' # Location of package manifests
     schedule:
-      interval: "daily"
-    reviewers:
-      - "DKrepsky"
-    target-branch: "beta"
+      interval: 'daily'
+    target-branch: 'master'
     commit-message:
-      prefix: "build"
-      include: "scope"
+      prefix: 'build'
+      include: 'scope'

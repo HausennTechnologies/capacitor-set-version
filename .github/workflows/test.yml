@@ -1,8 +1,7 @@
-name: Release
-on:
-  push:
-    branches:
-      - master
+name: Test
+
+on: [push, pull_request]
+
 jobs:
   release:
     name: Release
@@ -18,8 +17,7 @@ jobs:
           node-version: 14
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm test
