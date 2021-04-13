@@ -94,13 +94,28 @@ describe('capacitor-set-version', () => {
       expect(version).equals('0.0.8');
     });
 
+    it('should get ios build', () => {
+      const build = utils.getIOSBuild({ dir: path });
+      expect(build).equal(1);
+    });
+
+    it('should set ios build', () => {
+      utils.setIOSBuild({ dir: path, build: 10 });
+      const build = utils.getIOSBuild({ dir: path });
+      expect(build).equals(10);
+    });
+
     it('should return null when dir is invalid', () => {
       const version = utils.getIOSVersion({ dir: 'invalid' });
       expect(version).to.be.null;
+
+      const build = utils.getIOSBuild({ dir: 'invalid' });
+      expect(build).to.be.null;
     });
 
     it('should throw on set when dir is invalid', () => {
       expect(() => utils.setIOSVersion({ dir: 'invalid', version: '' })).to.throw();
+      expect(() => utils.setIOSBuild({ dir: 'invalid', build: 10 })).to.throw();
     });
   });
 });

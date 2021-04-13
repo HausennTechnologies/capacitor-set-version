@@ -5,7 +5,7 @@ import * as utils from './utils';
 import { ExitCode } from './exit-code';
 
 class CapacitorSetVersion extends Command {
-  static description = 'Set Android and iOS app version for capacitorjs projects.';
+  static description = 'Set Android and iOS app version and build number for capacitorjs projects.';
 
   static flags = {
     version: flags.string({ char: 'v' }),
@@ -36,7 +36,13 @@ class CapacitorSetVersion extends Command {
     const dir = this.getDir(args);
     const version = this.getVersion(dir, flags.version);
 
-    if (!this.quiet) this.log('version: ' + version);
+    if (!this.quiet) {
+      this.log('version: ' + version);
+    }
+
+    if (!this.quiet && flags.build) {
+      this.log('build: ' + flags.build);
+    }
 
     if (flags.android) {
       const androidVersion = utils.getAndroidVersion({ dir });
@@ -62,15 +68,21 @@ class CapacitorSetVersion extends Command {
 
     if (flags.ios) {
       const iosVersion = utils.getIOSVersion({ dir });
+      const iosBuild = utils.getIOSBuild({ dir });
 
-      if (!iosVersion) {
+      if (!iosVersion || !iosBuild) {
         this.error(`Invalid ios settings: ${iosVersion}`, { exit: ExitCode.ERROR_IOS });
       }
 
       utils.setIOSVersion({ dir, version });
 
+      const build = flags.build ? flags.build : iosBuild + 1;
+
+      utils.setIOSBuild({ dir, build: build });
+
       if (!this.quiet) {
         this.log(`iOS version: ${iosVersion} -> ${version}`);
+        this.log(`iOS build: ${iosBuild} -> ${build}`);
       }
     }
 

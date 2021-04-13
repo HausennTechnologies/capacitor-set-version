@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as fs from 'fs';
 import * as plist from 'plist';
 
@@ -62,7 +63,27 @@ export function setIOSVersion(options: { dir: string; version: string }): void {
   const parsed = plist.parse(file) as any;
 
   parsed.CFBundleShortVersionString = options.version;
-  parsed.CFBundleVersion = options.version;
+
+  const result = plist.build(parsed);
+  fs.writeFileSync(options.dir + iosFile, result, 'utf-8');
+}
+
+export function getIOSBuild(options: { dir: string }): number | null {
+  try {
+    const file = fs.readFileSync(options.dir + iosFile, 'utf-8');
+    const parsed = plist.parse(file) as any;
+
+    return parseInt(parsed.CFBundleVersion);
+  } catch (error) {
+    return null;
+  }
+}
+
+export function setIOSBuild(options: { dir: string; build: number }): void {
+  const file = fs.readFileSync(options.dir + iosFile, 'utf-8');
+  const parsed = plist.parse(file) as any;
+
+  parsed.CFBundleVersion = options.build;
 
   const result = plist.build(parsed);
   fs.writeFileSync(options.dir + iosFile, result, 'utf-8');

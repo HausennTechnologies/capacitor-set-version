@@ -60,14 +60,16 @@ describe('capacitor-set-version', () => {
     test
       .stdout()
       .do(() => cmd.run([path]))
-      .it('should set android and ios to package version and increment android build', ctx => {
+      .it('should set android and ios to package version and increment build number', ctx => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
         const androidBuild = utils.getAndroidBuild({ dir: path });
         const iosVersion = utils.getIOSVersion({ dir: path });
+        const iosBuild = utils.getIOSBuild({ dir: path });
 
         expect(androidVerion).to.equal('1.2.3');
         expect(androidBuild).to.equal(9);
         expect(iosVersion).to.equal('1.2.3');
+        expect(iosBuild).to.equal(2);
 
         expect(ctx.stdout).to.contain('version: 1.2.3');
       });
@@ -77,14 +79,16 @@ describe('capacitor-set-version', () => {
     test
       .stdout()
       .do(() => cmd.run(['-v', '2.5.5', path]))
-      .it('should set android and ios to --setversion and increment android build', ctx => {
+      .it('should set android and ios to --setversion and increment build number', ctx => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
         const androidBuild = utils.getAndroidBuild({ dir: path });
         const iosVersion = utils.getIOSVersion({ dir: path });
+        const iosBuild = utils.getIOSBuild({ dir: path });
 
         expect(androidVerion).to.equal('2.5.5');
         expect(androidBuild).to.equal(9);
         expect(iosVersion).to.equal('2.5.5');
+        expect(iosBuild).to.equal(2);
 
         expect(ctx.stdout).to.contain('version: 2.5.5');
       });
@@ -94,14 +98,16 @@ describe('capacitor-set-version', () => {
     test
       .stdout()
       .do(() => cmd.run(['-b', '10', path]))
-      .it('shoud set android build number to specific number', ctx => {
+      .it('shoud set build number to specific number', ctx => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
         const androidBuild = utils.getAndroidBuild({ dir: path });
         const iosVersion = utils.getIOSVersion({ dir: path });
+        const iosBuild = utils.getIOSBuild({ dir: path });
 
         expect(androidVerion).to.equal('1.2.3');
         expect(androidBuild).to.equal(10);
         expect(iosVersion).to.equal('1.2.3');
+        expect(iosBuild).to.equal(10);
 
         expect(ctx.stdout).to.contain('version: 1.2.3');
       });
@@ -115,10 +121,12 @@ describe('capacitor-set-version', () => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
         const androidBuild = utils.getAndroidBuild({ dir: path });
         const iosVersion = utils.getIOSVersion({ dir: path });
+        const iosBuild = utils.getIOSBuild({ dir: path });
 
         expect(androidVerion).to.equal('1.2.3');
         expect(androidBuild).to.equal(9);
         expect(iosVersion).to.equal('1.0');
+        expect(iosBuild).to.equal(1);
 
         expect(ctx.stdout).to.contain('version: 1.2.3');
       });
@@ -132,10 +140,12 @@ describe('capacitor-set-version', () => {
         const androidVerion = utils.getAndroidVersion({ dir: path });
         const androidBuild = utils.getAndroidBuild({ dir: path });
         const iosVersion = utils.getIOSVersion({ dir: path });
+        const iosBuild = utils.getIOSBuild({ dir: path });
 
         expect(androidVerion).to.equal('0.0.7');
         expect(androidBuild).to.equal(8);
         expect(iosVersion).to.equal('1.2.3');
+        expect(iosBuild).to.equal(2);
 
         expect(ctx.stdout).to.contain('version: 1.2.3');
       });
