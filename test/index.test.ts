@@ -160,13 +160,6 @@ describe('capacitor-set-version', () => {
       });
   });
 
-  describe('when project directory is not specified', () => {
-    test
-      .do(() => cmd.run([]))
-      .exit(ExitCode.ERROR_PROJECT)
-      .it('should fail');
-  });
-
   describe('when project directory does not exist', () => {
     test
       .do(() => cmd.run(['./doesnotexist']))

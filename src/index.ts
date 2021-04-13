@@ -92,10 +92,6 @@ class CapacitorSetVersion extends Command {
   }
 
   private getDir(args: { [name: string]: string }): string {
-    if (!args.dir) {
-      this.error('Project directory is required', { exit: ExitCode.ERROR_PROJECT });
-    }
-
     if (!fs.existsSync(args.dir)) {
       this.error('Project directory does not exist', { exit: ExitCode.ERROR_PROJECT });
     }
