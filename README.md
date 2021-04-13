@@ -52,10 +52,12 @@ or install globally:
 
 # How it works
 
-Calling `capacitor-set-version` will set your Android and iOS app versions to package.json version.
-Also, Android build number will be incremented.
+Calling `capacitor-set-version` will set your Android and iOS app versions to package.json version
+as well as increment the app build number.
 
-You can pass the version number as an argument to set it manually.
+For Android, build number means the `versionCode` option, on iOS this will use `CFBundleVersion`.
+
+If you want, you can specify both version and build number using options flags.
 
 ## Options
 

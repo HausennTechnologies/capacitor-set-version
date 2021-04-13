@@ -8,16 +8,16 @@ class CapacitorSetVersion extends Command {
   static description = 'Set Android and iOS app version and build number for capacitorjs projects.';
 
   static flags = {
-    version: flags.string({ char: 'v' }),
-    build: flags.integer({ char: 'b' }),
-    android: flags.boolean({ char: 'a' }),
-    ios: flags.boolean({ char: 'i' }),
-    quiet: flags.boolean({ char: 'q' }),
-    info: flags.version({ char: 'm' }),
-    help: flags.help({ char: 'h' }),
+    version: flags.string({ char: 'v', description: 'Set specific vesion' }),
+    build: flags.integer({ char: 'b', description: 'Set specific build' }),
+    android: flags.boolean({ char: 'a', description: 'Android only' }),
+    ios: flags.boolean({ char: 'i', description: 'iOS only' }),
+    quiet: flags.boolean({ char: 'q', description: 'Print only error messages' }),
+    info: flags.version({ char: 'm', description: 'Print tool version' }),
+    help: flags.help({ char: 'h', description: 'Show help' }),
   };
 
-  static args = [{ name: 'dir' }];
+  static args = [{ name: 'dir', description: 'Capacitor project root directory', required: true }];
 
   private quiet = false;
 
