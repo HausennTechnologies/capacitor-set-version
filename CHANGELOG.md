@@ -1,5 +1,7 @@
 CHANGES:
 
+## [1.3.21](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.3.20...v1.3.21) (2021-05-20)
+
 ## [1.3.20](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.3.19...v1.3.20) (2021-05-18)
 
 ## [1.3.19](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.3.18...v1.3.19) (2021-05-17)
