@@ -1,7 +1,7 @@
 {
   "name": "capacitor-set-version",
   "description": "Write version number and build number for Android and iOS on ionic/capacitor projects",
-  "version": "1.3.22",
+  "version": "1.3.23",
   "author": "Hausenn @HausennTechnologies",
   "license": "MIT",
   "homepage": "https://github.com/HausennTechnologies/capacitor-set-version",
