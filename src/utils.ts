@@ -83,7 +83,7 @@ export function setIOSBuild(options: { dir: string; build: number }): void {
   const file = fs.readFileSync(options.dir + iosFile, 'utf-8');
   const parsed = plist.parse(file) as any;
 
-  parsed.CFBundleVersion = options.build;
+  parsed.CFBundleVersion = options.build.toString();
 
   const result = plist.build(parsed);
   fs.writeFileSync(options.dir + iosFile, result, 'utf-8');

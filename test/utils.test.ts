@@ -1,6 +1,7 @@
 import { expect } from '@oclif/test';
 import { resolve } from 'path';
 import * as mockfs from 'mock-fs';
+import * as fs from 'fs';
 
 import * as utils from '../src/utils';
 
@@ -103,6 +104,17 @@ describe('capacitor-set-version', () => {
       utils.setIOSBuild({ dir: path, build: 10 });
       const build = utils.getIOSBuild({ dir: path });
       expect(build).equals(10);
+    });
+
+    // Fix #159
+    it('should set ios build as string', () => {
+      utils.setIOSBuild({ dir: path, build: 10 });
+
+      const file = fs.readFileSync(path + '/ios/App/App/Info.plist', 'utf-8');
+
+      const ok = file.includes('<string>10</string>');
+
+      expect(ok).to.be.true;
     });
 
     it('should return null when dir is invalid', () => {
