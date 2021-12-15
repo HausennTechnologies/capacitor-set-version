@@ -45,7 +45,7 @@
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.2",
-    "@oclif/plugin-not-found": "^1.2.4",
+    "@oclif/plugin-not-found": "^2.2.3",
     "plist": "^3.0.2",
     "semver": "^7.3.5",
     "tslib": "^2.2.0"
