@@ -1,5 +1,12 @@
 CHANGES:
 
+## [1.3.32](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.3.31...v1.3.32) (2021-12-15)
+
+
+### Bug Fixes
+
+* ios build number as string ([bb74e22](https://github.com/HausennTechnologies/capacitor-set-version/commit/bb74e22fcfad260dcecb21f13f0975c0bf5431ef)), closes [#159](https://github.com/HausennTechnologies/capacitor-set-version/issues/159)
+
 ## [1.3.31](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.3.30...v1.3.31) (2021-12-15)
 
 ## [1.3.30](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.3.29...v1.3.30) (2021-12-15)
