@@ -27,7 +27,7 @@ export function getAndroidVersion(options: { dir: string }): string | null {
 
 export function setAndroidVersion(options: { dir: string; version: string }): void {
   const file = fs.readFileSync(options.dir + androidFile, 'utf-8');
-  const result = file.replace(/(.*(?:versionName).*)/g, `        versionName "${options.version}"`);
+  const result = file.replace(/(.*(?:versionName[ \t]+).*)/g, `        versionName "${options.version}"`);
   fs.writeFileSync(options.dir + androidFile, result, 'utf-8');
 }
 
