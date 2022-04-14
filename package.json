@@ -47,7 +47,9 @@
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-plugins",
-      "@oclif/plugin-version"
+      "@oclif/plugin-version",
+      "@oclif/plugin-commands",
+      "@oclif/plugin-autocomplete"
     ],
     "topics": {
       "set": {
@@ -57,6 +59,8 @@
   },
   "dependencies": {
     "@oclif/core": "^1",
+    "@oclif/plugin-autocomplete": "^1.2.0",
+    "@oclif/plugin-commands": "^2.1.0",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^2.0.1",
     "@oclif/plugin-version": "^1.0.4",
