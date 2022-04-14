@@ -63,7 +63,7 @@ If you want, you can specify both version and build number using options flags.
 
 Flags bellow are used to change the default behavior.
 
-```
+```bash
 USAGE
   $ capacitor-set-version DIR
 

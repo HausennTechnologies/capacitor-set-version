@@ -3,26 +3,26 @@ import { resolve } from 'path';
 import * as mockfs from 'mock-fs';
 import * as fs from 'fs';
 
-import * as utils from '../src/utils';
+import * as utils from '../../src/utils/utils';
 
-describe('capacitor-set-version', () => {
+describe('utils', () => {
   const path = './mockfs';
 
   beforeEach(() => {
     mockfs({
-      'package.json': mockfs.load(resolve(__dirname, '../package.json')),
-      'node_modules': mockfs.load(resolve(__dirname, '../node_modules')),
+      'package.json': mockfs.load(resolve(__dirname, '../../package.json')),
+      'node_modules': mockfs.load(resolve(__dirname, '../../node_modules')),
       'mockfs': {
-        'package.json': mockfs.load(resolve(__dirname, 'mockfs/package.json')),
+        'package.json': mockfs.load(resolve(__dirname, '../mockfs/package.json')),
         'android': {
           app: {
-            'build.gradle': mockfs.load(resolve(__dirname, 'mockfs/build.gradle')),
+            'build.gradle': mockfs.load(resolve(__dirname, '../mockfs/build.gradle')),
           },
         },
         'ios': {
           App: {
             App: {
-              'Info.plist': mockfs.load(resolve(__dirname, 'mockfs/info.plist')),
+              'Info.plist': mockfs.load(resolve(__dirname, '../mockfs/info.plist')),
             },
           },
         },

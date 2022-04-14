@@ -1,16 +1,33 @@
 {
   "root": true,
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier"],
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
-  ],
-  "rules": {
-    "prettier/prettier": "error",
-    "object-curly-spacing": ["off", "always"],
-    "semi": ["off", "always"]
-  }
+  "plugins": ["prettier"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "extends": ["eslint:recommended", "prettier"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint", "prettier"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended",
+        "prettier"
+      ],
+      "rules": {
+        "prettier/prettier": "error",
+        "object-curly-spacing": ["off", "always"],
+        "semi": ["off", "always"]
+      }
+    }
+  ]
 }
