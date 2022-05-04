@@ -16,4 +16,12 @@ export default abstract class BaseCommand extends Command {
 
     super.log(message, args);
   }
+
+  async catch(err: Error & { exitCode?: number }) {
+    return super.catch(err);
+  }
+
+  async finally(_: Error | undefined) {
+    return super.finally(_);
+  }
 }
