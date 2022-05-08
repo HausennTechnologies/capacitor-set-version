@@ -1,27 +1,34 @@
 import { Command, Flags } from '@oclif/core';
 
 export default abstract class BaseCommand extends Command {
-  static args = [{ name: 'dir', description: 'Capacitor project root directory', required: false }];
-  static flags = { quiet: Flags.boolean({ char: 'q', description: 'Print only error messages' }) };
+  static quiet = false;
+  static enableJsonFlag = true;
 
-  public quiet = false;
+  static args = [{ name: 'dir', description: 'Capacitor project root directory', required: false, default: './' }];
+  static flags = {
+    version: Flags.string({ char: 'v', description: 'Set specific version', helpValue: 'x.x.x', required: true }),
+    build: Flags.integer({ char: 'b', description: 'Set specific build', helpValue: '10', required: true }),
+    quiet: Flags.boolean({ char: 'q', description: 'Print only error messages' }),
+  };
 
   public async init() {
     const { flags } = await this.parse(BaseCommand);
-    this.quiet = flags.quiet;
+    BaseCommand.quiet = flags.quiet;
   }
 
   public log(message?: string, ...args: unknown[]): void {
-    if (this.quiet) return;
+    if (BaseCommand.quiet) return;
 
-    super.log(message, args);
+    super.log(message, ...args);
   }
 
-  async catch(err: Error & { exitCode?: number }) {
-    return super.catch(err);
-  }
+  async catch(err: Error & { exitCode?: number | undefined }) {
+    const message = err?.message ?? 'unknown error';
 
-  async finally(_: Error | undefined) {
-    return super.finally(_);
+    if (!this.jsonEnabled()) {
+      console.error(err.message);
+    } else {
+      console.error({ error: { message } });
+    }
   }
 }

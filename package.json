@@ -43,6 +43,14 @@
   "oclif": {
     "bin": "capacitor-set-version",
     "dirname": "capacitor-set-version",
+    "commands": "./dist/commands",
+    "default": "set",
+    "topicSeparator": ":",
+    "topics": {
+      "set": {
+        "description": "Set Version and Build Number for Android and iOS projects"
+      }
+    },
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-plugins",
