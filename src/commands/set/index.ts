@@ -17,8 +17,8 @@ export default class Set extends BaseCommand {
     const version = flags.version;
     const build = flags.build;
 
-    await SetAndroid.run([dir, '-v', flags.version, '-b', flags.build.toString()]);
-    await SetIOS.run([dir, '-v', flags.version, '-b', flags.build.toString()]);
+    await SetAndroid.run([dir, '-v', version, '-b', build.toString()]);
+    await SetIOS.run([dir, '-v', version, '-b', build.toString()]);
 
     return { version, build };
   }

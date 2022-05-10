@@ -18,11 +18,19 @@ export function checkForAndroidPlatform(dir: string) {
 export function setAndroidVersionAndBuild(dir: string, version: string, build: number) {
   const gradleBuildFilePath = path.join(dir, 'android/app/build.gradle');
 
-  let file = fs.readFileSync(gradleBuildFilePath, 'utf-8');
+  let file = openGradleBuildFile(gradleBuildFilePath);
 
   file = setAndroidVersion(file, version);
   file = setAndroidBuild(file, build);
 
+  saveGradleBuildFile(gradleBuildFilePath, file);
+}
+
+function openGradleBuildFile(gradleBuildFilePath: string) {
+  return fs.readFileSync(gradleBuildFilePath, 'utf-8');
+}
+
+function saveGradleBuildFile(gradleBuildFilePath: string, file: string) {
   fs.writeFileSync(gradleBuildFilePath, file, 'utf-8');
 }
 

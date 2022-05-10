@@ -27,11 +27,34 @@ export function isLegacyIOSProject(dir: string): boolean {
 export function setIOSVersionAndBuild(dir: string, version: string, build: number) {
   const projectFilePath = path.join(dir, IOS_PROJECT_FILE_PATH);
 
-  let file = fs.readFileSync(projectFilePath, 'utf-8');
+  let file = openIOSConfigFile(projectFilePath);
 
   file = setIOSVersion(file, version);
   file = setIOSBuild(file, build);
 
+  saveIOSConfigFile(projectFilePath, file);
+}
+
+export function setIOSVersionAndBuildLegacy(dir: string, version: string, build: number) {
+  const plistFilePath = path.join(dir, IOS_PLIST_FILE_PATH);
+
+  let file = openInfoPlistFile(plistFilePath);
+
+  const parsed = plist.parse(file);
+
+  setIOSVersionLegacy(file, version);
+  setIOSBuildLegacy(file, build);
+
+  file = plist.build(parsed);
+
+  saveInfoPlistFile(plistFilePath, file);
+}
+
+function openIOSConfigFile(projectFilePath: string) {
+  return fs.readFileSync(projectFilePath, 'utf-8');
+}
+
+function saveIOSConfigFile(projectFilePath: string, file: string) {
   fs.writeFileSync(projectFilePath, file, 'utf-8');
 }
 
@@ -49,18 +72,11 @@ function setIOSBuild(file: string, build: number): string {
   return file.replace(/(CURRENT_PROJECT_VERSION = ).*/g, `CURRENT_PROJECT_VERSION = ${build};`);
 }
 
-export function setIOSVersionAndBuildLegacy(dir: string, version: string, build: number) {
-  const plistFilePath = path.join(dir, IOS_PLIST_FILE_PATH);
+function openInfoPlistFile(plistFilePath: string) {
+  return fs.readFileSync(plistFilePath, 'utf-8');
+}
 
-  let file = fs.readFileSync(plistFilePath, 'utf-8');
-
-  const parsed = plist.parse(file);
-
-  setIOSVersionLegacy(file, version);
-  setIOSBuildLegacy(file, build);
-
-  file = plist.build(parsed);
-
+function saveInfoPlistFile(plistFilePath: string, file: string) {
   fs.writeFileSync(plistFilePath, file, 'utf-8');
 }
 

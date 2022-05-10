@@ -17,18 +17,16 @@ export default abstract class BaseCommand extends Command {
   }
 
   public log(message?: string, ...args: unknown[]): void {
-    if (BaseCommand.quiet) return;
-
-    super.log(message, ...args);
+    if (!BaseCommand.quiet) super.log(message, ...args);
   }
 
   async catch(err: Error & { exitCode?: number | undefined }) {
     const message = err?.message ?? 'unknown error';
 
-    if (!this.jsonEnabled()) {
-      console.error(err.message);
-    } else {
+    if (this.jsonEnabled()) {
       console.error({ error: { message } });
+    } else {
+      console.error(err.message);
     }
   }
 }
