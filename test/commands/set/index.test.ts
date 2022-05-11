@@ -1,14 +1,14 @@
-import { test, expect } from '@oclif/test';
-
 import { VersionInfo } from '../../../src/common/version-info.type';
 import MockFsFactory from '../../mockfs/mockfs.factory';
 
-describe('capacitor-set-version', () => {
-  const versionInfo: VersionInfo = {
-    version: '1.5.0-rc1',
-    build: 150,
-  };
+const versionInfo: VersionInfo = {
+  version: '1.5.0-rc1',
+  build: 150,
+};
 
+import { expect, test } from '@oclif/test';
+
+describe('set', () => {
   beforeEach(() => {
     MockFsFactory.createMockFs();
   });
@@ -19,18 +19,27 @@ describe('capacitor-set-version', () => {
 
   test
     .stdout()
-    // .command(['set', MockFsFactory.DIR_PROJECT, '-v', versionInfo.version, '-b', versionInfo.build.toString()])
-    .command(['set', '-v', '1.1.1', '-b', '45'])
-    .it('should set android and ios version and build number', ctx => {
-      // expect(ctx.stdout).to.be.empty('string');
-      console.log(ctx.stdout);
-      expect(ctx.stdout).to.contain('set');
+    .stderr()
+    .command(['set', '-v', versionInfo.version, '-b', versionInfo.build.toString(), MockFsFactory.DIR_PROJECT])
+    .it('runs set cmd', ctx => {
+      expect(ctx.stdout).to.equal('');
+      expect(ctx.stderr).to.equal('');
     });
 
   test
     .stdout()
-    .command(['set', MockFsFactory.DIR_PROJECT, '-v', versionInfo.version, '-b', versionInfo.build.toString()])
-    .it('should set android and ios to package version and increment build number', ctx => {
+    .stderr()
+    .command([
+      'set',
+      '-v',
+      versionInfo.version,
+      '-b',
+      versionInfo.build.toString(),
+      MockFsFactory.DIR_PROJECT,
+      '--json',
+    ])
+    .it('runs set cmd', ctx => {
       expect(ctx.stdout).to.contain(JSON.stringify(versionInfo, null, 2));
+      expect(ctx.stderr).to.equal('');
     });
 });

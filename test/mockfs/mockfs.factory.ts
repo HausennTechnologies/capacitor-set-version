@@ -18,7 +18,13 @@ export default class MockFsFactory {
   static createMockFs() {
     mockfs({
       'package.json': mockfs.load(resolve(__dirname, '../../package.json')),
+      '.mocharc.json': mockfs.load(resolve(__dirname, '../../.mocharc.json')),
+      'tsconfig.json': mockfs.load(resolve(__dirname, '../../tsconfig.json')),
       'node_modules': mockfs.load(resolve(__dirname, '../../node_modules')),
+      'bin': mockfs.load(resolve(__dirname, '../../bin')),
+      'src': mockfs.load(resolve(__dirname, '../../src')),
+      'test': mockfs.load(resolve(__dirname, '../../test')),
+      // 'dist': mockfs.load(resolve(__dirname, '../../dist')),
       'project': {
         'capacitor.config.ts': mockfs.load(resolve(__dirname, '../mockfs/capacitor.config.ts')),
         'android': {
