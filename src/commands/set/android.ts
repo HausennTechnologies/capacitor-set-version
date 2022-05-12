@@ -16,11 +16,18 @@ export default class SetAndroid extends BaseCommand {
     const dir = args['dir'];
     const version = flags.version;
     const build = flags.build;
+    this.log('error');
 
-    checkForCapacitorProject(dir);
-    checkForAndroidPlatform(dir);
-    setAndroidVersionAndBuild(dir, version, build);
-
+    try {
+      checkForCapacitorProject(dir);
+      checkForAndroidPlatform(dir);
+      setAndroidVersionAndBuild(dir, version, build);
+    } catch (error) {
+      if (typeof error === 'object' && error instanceof Error)
+        this.error(error, { exit: -1, code: 'asd1', message: error.message });
+      if (typeof error === 'string') this.error(error, { exit: -1, message: error, code: 'asd2' });
+      this.error('Unknown error', { exit: -1, message: 'asdasd', code: 'asd3' });
+    }
     return { version, build };
   }
 }

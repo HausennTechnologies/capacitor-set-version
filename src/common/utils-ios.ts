@@ -42,8 +42,8 @@ export function setIOSVersionAndBuildLegacy(dir: string, version: string, build:
 
   const parsed = plist.parse(file);
 
-  setIOSVersionLegacy(file, version);
-  setIOSBuildLegacy(file, build);
+  setIOSVersionLegacy(parsed, version);
+  setIOSBuildLegacy(parsed, build);
 
   file = plist.build(parsed);
 

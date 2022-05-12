@@ -20,13 +20,7 @@ export default abstract class BaseCommand extends Command {
     if (!BaseCommand.quiet) super.log(message, ...args);
   }
 
-  async catch(err: Error & { exitCode?: number | undefined }) {
-    const message = err?.message ?? 'unknown error';
-
-    if (this.jsonEnabled()) {
-      console.error({ error: { message } });
-    } else {
-      console.error(err.message);
-    }
-  }
+  // async catch(err: Error & { exitCode?: number | undefined }) {
+  //   this.error(err.message);
+  // }
 }
