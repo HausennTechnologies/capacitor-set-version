@@ -1,14 +1,14 @@
-import BaseCommand from '../../common/base-command';
+import CustomCommand from '../../common/custom-command';
 import SetAndroid from './android';
 import { VersionInfo } from '../../common/version-info.type';
 import SetIOS from './ios';
 
-export default class Set extends BaseCommand {
+export default class Set extends CustomCommand {
   static description = 'Set Android and iOS app version and build number for capacitorjs projects.';
   static examples = ['<%= config.bin %> <%= command.id %> /project/path -v 1.0.0-rc1 -b 10'];
 
-  static args = [...BaseCommand.args];
-  static flags = { ...BaseCommand.flags };
+  static args = [...CustomCommand.args];
+  static flags = { ...CustomCommand.flags };
 
   public async run(): Promise<VersionInfo> {
     const { args, flags } = await this.parse(Set);

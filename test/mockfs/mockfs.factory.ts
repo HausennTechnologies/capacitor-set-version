@@ -11,14 +11,10 @@ export default class MockFsFactory {
   static DIR_NO_BUILD_GRADLE_BUILD = 'no_build_gradle_build';
   static DIR_NO_IOS = 'no_ios';
   static DIR_IOS_LEGACY = 'ios_legacy';
-
-  static FILE_PACKAGE_JSON = 'project/package.json';
-  static FILE_BUILD_GRADLE = 'project/android/app/build.gradle';
-  static FILE_IOS_INFO_PLIST = 'project/ios/App/App/info.plist';
-  static FILE_IOS_INFO_PLIST_LEGACY = 'project/ios/App/App/info.plist.legacy';
-  static FILE_IOS_PROJECT_PBXPROJ = 'project/ios/App/App.xcodeproj/project.pbxproj';
-  static FILE_CAPACITOR_CONFIG_JSON = 'project/capacitor.config.json';
-  static FILE_CAPACITOR_CONFIG_TS = 'project/capacitor.config.ts';
+  static DIR_IOS_NO_INFO_PLIST = 'ios_no_info_plist';
+  static DIR_IOS_NO_PROJECT_FILE = 'ios_no_project_file';
+  static DIR_IOS_NO_PROJECT_VERSION = 'ios_no_project_version';
+  static DIR_IOS_NO_PROJECT_BUILD = 'ios_no_project_build';
 
   static createMockFs() {
     mockfs({
@@ -91,6 +87,54 @@ export default class MockFsFactory {
           App: {
             App: {
               'Info.plist': mockfs.load(resolve(__dirname, '../mockfs/info.plist.legacy')),
+            },
+          },
+        },
+      },
+      'ios_no_info_plist': {
+        'capacitor.config.ts': mockfs.load(resolve(__dirname, '../mockfs/capacitor.config.ts')),
+        'ios': {
+          App: {
+            'App': {},
+            'App.xcodeproj': {
+              'project.pbxproj': mockfs.load(resolve(__dirname, '../mockfs/project.pbxproj')),
+            },
+          },
+        },
+      },
+      'ios_no_project_file': {
+        'capacitor.config.ts': mockfs.load(resolve(__dirname, '../mockfs/capacitor.config.ts')),
+        'ios': {
+          App: {
+            'App': {
+              'Info.plist': mockfs.load(resolve(__dirname, '../mockfs/info.plist')),
+            },
+            'App.xcodeproj': {},
+          },
+        },
+      },
+      'ios_no_project_version': {
+        'capacitor.config.ts': mockfs.load(resolve(__dirname, '../mockfs/capacitor.config.ts')),
+        'ios': {
+          App: {
+            'App': {
+              'Info.plist': mockfs.load(resolve(__dirname, '../mockfs/info.plist')),
+            },
+            'App.xcodeproj': {
+              'project.pbxproj': mockfs.load(resolve(__dirname, '../mockfs/project.pbxproj.no-version')),
+            },
+          },
+        },
+      },
+      'ios_no_project_build': {
+        'capacitor.config.ts': mockfs.load(resolve(__dirname, '../mockfs/capacitor.config.ts')),
+        'ios': {
+          App: {
+            'App': {
+              'Info.plist': mockfs.load(resolve(__dirname, '../mockfs/info.plist')),
+            },
+            'App.xcodeproj': {
+              'project.pbxproj': mockfs.load(resolve(__dirname, '../mockfs/project.pbxproj.no-build')),
             },
           },
         },

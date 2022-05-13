@@ -1,1 +1,0 @@
-Invalid project path: directory /home/kr/Proj does not exist

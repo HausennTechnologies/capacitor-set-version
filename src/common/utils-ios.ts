@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as plist from 'plist';
 import * as path from 'path';
+import CustomError from './custom-error';
 
 export const IOS_PLIST_FILE_PATH = 'ios/App/App/Info.plist';
 export const IOS_PROJECT_FILE_PATH = 'ios/App/App.xcodeproj/project.pbxproj';
@@ -8,12 +9,21 @@ export const IOS_PROJECT_FILE_PATH = 'ios/App/App.xcodeproj/project.pbxproj';
 export function checkForIOSPlatform(dir: string) {
   const iosFolderPath = path.join(dir, 'ios');
 
-  if (!fs.existsSync(iosFolderPath)) throw new Error(`Invalid iOS platform: folder ${iosFolderPath} does not exist`);
+  if (!fs.existsSync(iosFolderPath)) {
+    throw new CustomError(`Invalid iOS platform: folder ${iosFolderPath} does not exist`, {
+      code: 'ERR_IOS',
+      suggestions: ['Make sure your Capacitor project has the ios platform added'],
+    });
+  }
 
   const infoPlistFilePath = path.join(dir, IOS_PLIST_FILE_PATH);
 
-  if (!fs.existsSync(infoPlistFilePath))
-    throw new Error(`Invalid iOS platform: file ${infoPlistFilePath} does not exist`);
+  if (!fs.existsSync(infoPlistFilePath)) {
+    throw new CustomError(`Invalid iOS platform: file ${infoPlistFilePath} does not exist`, {
+      code: 'ERR_IOS',
+      suggestions: ['Check the integrity of your ios folder', 'Add again the ios platform to your project'],
+    });
+  }
 }
 
 export function isLegacyIOSProject(dir: string): boolean {
@@ -27,12 +37,12 @@ export function isLegacyIOSProject(dir: string): boolean {
 export function setIOSVersionAndBuild(dir: string, version: string, build: number) {
   const projectFilePath = path.join(dir, IOS_PROJECT_FILE_PATH);
 
-  let file = openIOSConfigFile(projectFilePath);
+  let file = openIOSProjectFile(projectFilePath);
 
   file = setIOSVersion(file, version);
   file = setIOSBuild(file, build);
 
-  saveIOSConfigFile(projectFilePath, file);
+  saveIOSProjectFile(projectFilePath, file);
 }
 
 export function setIOSVersionAndBuildLegacy(dir: string, version: string, build: number) {
@@ -50,26 +60,53 @@ export function setIOSVersionAndBuildLegacy(dir: string, version: string, build:
   saveInfoPlistFile(plistFilePath, file);
 }
 
-function openIOSConfigFile(projectFilePath: string) {
-  return fs.readFileSync(projectFilePath, 'utf-8');
+function openIOSProjectFile(projectFilePath: string) {
+  try {
+    return fs.readFileSync(projectFilePath, 'utf-8');
+  } catch (error) {
+    throw new CustomError(`Invalid iOS project file: file ${projectFilePath} does not exist`, {
+      code: 'ERR_IOS',
+    });
+  }
 }
 
-function saveIOSConfigFile(projectFilePath: string, file: string) {
+function saveIOSProjectFile(projectFilePath: string, file: string) {
   fs.writeFileSync(projectFilePath, file, 'utf-8');
 }
 
 function setIOSVersion(file: string, version: string): string {
-  if (!file.match(/(MARKETING_VERSION = ).*/g))
-    throw new Error(`Could not find "MARKETING_VERSION" in project.pbxproj file`);
-
+  checkIfVersionExist(file);
   return file.replace(/(MARKETING_VERSION = ).*/g, `MARKETING_VERSION = ${version};`);
 }
 
+function checkIfVersionExist(file: string) {
+  if (file.match(/(MARKETING_VERSION = ).*/g)) return;
+
+  throw new CustomError(`Could not find "MARKETING_VERSION" in project.pbxproj file`, {
+    code: 'ERR_IOS',
+    suggestions: [
+      'Check if "MARKETING_VERSION" is found inside file ios/App/App.xcodeproj/project.pbxproj file.',
+      'Update you iOS xCode project to auto manage the project version',
+    ],
+  });
+}
+
 function setIOSBuild(file: string, build: number): string {
-  if (!file.match(/(CURRENT_PROJECT_VERSION = ).*/g))
-    throw new Error(`Could not find "CURRENT_PROJECT_VERSION" in project.pbxproj file`);
+  checkIfBuildNumberExist(file);
 
   return file.replace(/(CURRENT_PROJECT_VERSION = ).*/g, `CURRENT_PROJECT_VERSION = ${build};`);
+}
+
+function checkIfBuildNumberExist(file: string) {
+  if (file.match(/(CURRENT_PROJECT_VERSION = ).*/g)) return;
+
+  throw new CustomError(`Could not find "CURRENT_PROJECT_VERSION" in project.pbxproj file`, {
+    code: 'ERR_IOS',
+    suggestions: [
+      'Check if "CURRENT_PROJECT_VERSION" is found inside file ios/App/App.xcodeproj/project.pbxproj file.',
+      'Update you iOS xCode project to auto manage the project version',
+    ],
+  });
 }
 
 function openInfoPlistFile(plistFilePath: string) {

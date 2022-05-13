@@ -42,18 +42,7 @@ describe('when capacitor-set-version is called', () => {
         '--json',
       ])
       .it('should set android and ios versions and print the new version as json', ctx => {
-        expect(ctx.stdout).to.contain(JSON.stringify(versionInfo, null, 2));
-        expect(ctx.stderr).to.be.empty;
-      });
-  });
-
-  describe('with aditional -q flag', () => {
-    test
-      .stdout()
-      .stderr()
-      .command(['set', '-v', versionInfo.version, '-b', versionInfo.build.toString(), MockFsFactory.DIR_PROJECT, '-q'])
-      .it('should set android and ios versions and print nothing', ctx => {
-        expect(ctx.stdout).to.be.empty;
+        expect(ctx.stdout).to.contain('"status": "success"');
         expect(ctx.stderr).to.be.empty;
       });
   });
@@ -69,12 +58,13 @@ describe('when capacitor-set-version is called', () => {
 
   describe('with a non existing project folder and --json flag', () => {
     test
+      .stdout()
+      .stderr()
       .command(['set', '--json', '-v', versionInfo.version, '-b', versionInfo.build.toString(), './asd'])
-      .catch(err => {
-        expect(err.message).to.contain('"error":');
-        expect(err.message).to.contain('Invalid project path');
-      })
-      .it('should error');
+      .it('should error', ctx => {
+        expect(ctx.stderr).to.be.empty;
+        expect(ctx.stdout).to.contain('"status": "error"');
+      });
   });
 
   describe('with an invalid project folder', () => {
@@ -84,19 +74,6 @@ describe('when capacitor-set-version is called', () => {
         expect(err.message).to.contain('Invalid CapacitorJS project');
       })
       .it('should error');
-  });
-
-  describe('with a legacy iOS project', () => {
-    test
-      .stdout()
-      .stderr()
-      .command(['set:ios', '-v', versionInfo.version, '-b', versionInfo.build.toString(), MockFsFactory.DIR_IOS_LEGACY])
-      .it('should set the version in Info.plist', ctx => {
-        expect(ctx.stderr).to.be.equal(
-          ` ›   Warning: Legacy iOS project detected, please update to the latest xCode\n`,
-        );
-        expect(ctx.stdout).to.be.empty;
-      });
   });
 
   describe('for android project without android folder', () => {
@@ -135,7 +112,7 @@ describe('when capacitor-set-version is called', () => {
         MockFsFactory.DIR_NO_BUILD_GRADLE_VERSION,
       ])
       .catch(err => {
-        expect(err.message).to.contain('Could not find "versionName" in build.grade file');
+        expect(err.message).to.contain('Could not find "versionName" in android/app/build.grade file');
       })
       .it('should error');
   });
@@ -151,7 +128,93 @@ describe('when capacitor-set-version is called', () => {
         MockFsFactory.DIR_NO_BUILD_GRADLE_BUILD,
       ])
       .catch(err => {
-        expect(err.message).to.contain('Could not find "versionCode" in build.grade file');
+        expect(err.message).to.contain('Could not find "versionCode" in android/app/build.grade file');
+      })
+      .it('should error');
+  });
+
+  describe('with a legacy iOS project', () => {
+    test
+      .stdout()
+      .stderr()
+      .command(['set:ios', '-v', versionInfo.version, '-b', versionInfo.build.toString(), MockFsFactory.DIR_IOS_LEGACY])
+      .it('should set the version in Info.plist', ctx => {
+        expect(ctx.stderr).to.be.equal(
+          ` ›   Warning: Legacy iOS project detected, please update to the latest xCode\n`,
+        );
+        expect(ctx.stdout).to.be.empty;
+      });
+  });
+
+  describe('for ios project without ios folder', () => {
+    test
+      .command(['set:ios', '-v', versionInfo.version, '-b', versionInfo.build.toString(), MockFsFactory.DIR_NO_IOS])
+      .catch(err => {
+        expect(err.message).to.contain('Invalid iOS platform: folder');
+      })
+      .it('should error');
+  });
+
+  describe('for ios project without info.plist file', () => {
+    test
+      .command([
+        'set:ios',
+        '-v',
+        versionInfo.version,
+        '-b',
+        versionInfo.build.toString(),
+        MockFsFactory.DIR_IOS_NO_INFO_PLIST,
+      ])
+      .catch(err => {
+        expect(err.message).to.contain('Invalid iOS platform: file');
+      })
+      .it('should error');
+  });
+
+  describe('for ios project without project file', () => {
+    test
+      .command([
+        'set:ios',
+        '-v',
+        versionInfo.version,
+        '-b',
+        versionInfo.build.toString(),
+        MockFsFactory.DIR_IOS_NO_PROJECT_FILE,
+      ])
+      .catch(err => {
+        expect(err.message).to.contain('Invalid iOS project file: file');
+      })
+      .it('should error');
+  });
+
+  describe('for ios project without project version', () => {
+    test
+      .command([
+        'set:ios',
+        '-v',
+        versionInfo.version,
+        '-b',
+        versionInfo.build.toString(),
+        MockFsFactory.DIR_IOS_NO_PROJECT_VERSION,
+      ])
+      .catch(err => {
+        expect(err.message).to.contain('Could not find "MARKETING_VERSION" in project.pbxproj file');
+      })
+      .it('should error');
+  });
+
+  describe('for ios project without project build', () => {
+    test
+      .command([
+        'set:ios',
+        '-v',
+        versionInfo.version,
+        '-b',
+        versionInfo.build.toString(),
+        MockFsFactory.DIR_IOS_NO_PROJECT_BUILD,
+      ])
+      .catch(err => {
+        expect(err.message).to.contain('Could not find "CURRENT_PROJECT_VERSION" in project.pbxproj file');
       })
       .it('should error');
   });

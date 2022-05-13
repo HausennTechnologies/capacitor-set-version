@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import CustomError from './custom-error';
 
 export const ANDROID_CONFIG_FILE = 'android/app/build.gradle';
 
@@ -35,11 +36,29 @@ function saveGradleBuildFile(gradleBuildFilePath: string, file: string) {
 }
 
 function setAndroidVersion(file: string, version: string): string {
-  if (!file.match(/(versionName).*/g)) throw new Error(`Could not find "versionName" in build.grade file`);
+  checkIfVersionNameExist(file);
   return file.replace(/(versionName).*/g, `versionName "${version}"`);
 }
 
+function checkIfVersionNameExist(file: string) {
+  if (!file.match(/(versionName).*/g)) {
+    throw new CustomError(`Could not find "versionName" in android/app/build.grade file`, {
+      code: 'ERR_ANDROID',
+      suggestions: ['Add "versionName" your build.gradle file'],
+    });
+  }
+}
+
 function setAndroidBuild(file: string, build: number): string {
-  if (!file.match(/(versionCode).*/g)) throw new Error(`Could not find "versionCode" in build.grade file`);
+  checkIfVersionCodeExist(file);
   return file.replace(/(versionCode).*/g, `versionCode ${build}`);
+}
+
+function checkIfVersionCodeExist(file: string) {
+  if (!file.match(/(versionCode).*/g)) {
+    throw new CustomError(`Could not find "versionCode" in android/app/build.grade file`, {
+      code: 'ERR_ANDROID',
+      suggestions: ['Add "versionCode" to your build.gradle file'],
+    });
+  }
 }
