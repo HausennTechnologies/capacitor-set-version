@@ -34,19 +34,19 @@ Build With
 
 Use with npx without install:
 
-```sh-session
+```bash
   npx capacitor-set-version [DIR] -v <value> -b <value> [--json]
 ```
 
 install as a development dependency:
 
-```sh-session
+```bash
   npm i -D capacitor-set-version
 ```
 
 or install globally:
 
-```sh-session
+```bash
   npm i -g capacitor-set-version
 ```
 
@@ -76,24 +76,47 @@ OPTIONS
 
 ## Setting version for iOS or Android only
 
+If you need to update the version in only one platform, you can use the commands "set:ios" or "set:android", accordingly.
+
+```bash
+# Set android version only
+capacitor-set-version set:android -v 1.1.1 -b 100 ./my-app
+
+# Set ios version only
+capacitor-set-version set:ios -v 1.1.1 -b 100 ./my-app
+```
+
 # Usage
 
 ## Examples
 
-```sh-session
-// Set version to 1.2.3 and build number to 10 on current folder.
+```bash
+# Set version to 1.2.3 and build number to 10 on current folder.
 capacitor-set-version -v 1.2.3 -b 10
 
-// Set version of project on folder ./my-app
+# Set version of project on folder ./my-app
 capacitor-set-version -v 1.2.3 -b 10 ./my-app
 
-// Set android only version and build number
+# Set android only version and build number
 capacitor-set-version set:android -v 1.2.3-rc1 -b 1546 ./my-app
 
-// Set iOS version only
+# Set iOS version only
 capacitor-set-version set:ios -v 1.2.3 -b 10 ./my-app
 
 ```
+
+# Migrating from version 1.x.x
+
+A lot of changes were made from version 1.x.x, with some features being removed. Bellow is a list of all braking changes:
+
+- Removed reading the version from package.json;
+- Removed auto-increment for version and build numbers;
+- Flags -v and -b are now mandatory;
+- Replaced flags for ios and android with commands "set:ios" and "set:android".
+
+If you need any of these features back, open up an issue relating your use case.
+
+<br>
 
 <p align="center">
   <a style="color: #7c7c7c; font-size: small; margin-top: 2em" href="https://www.hausenn.com.br">
