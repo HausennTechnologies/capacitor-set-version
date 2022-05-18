@@ -1,10 +1,20 @@
 version: 2
 updates:
-  - package-ecosystem: 'npm' # See documentation for possible values
-    directory: '/' # Location of package manifests
+  - package-ecosystem: 'npm'
+    versioning-strategy: increase
+    directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'monthly'
+    labels:
+      - 'dependencies'
     target-branch: 'master'
+    open-pull-requests-limit: 100
+    pull-request-branch-name:
+      separator: '-'
+    ignore:
+      - dependency-name: 'fs-extra'
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']
     commit-message:
       prefix: 'build'
       include: 'scope'

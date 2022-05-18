@@ -7,6 +7,20 @@
   "homepage": "https://github.com/HausennTechnologies/capacitor-set-version",
   "repository": "https://github.com/HausennTechnologies/capacitor-set-version",
   "bugs": "https://github.com/HausennTechnologies/capacitor-set-version/issues",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b && rm tsconfig.tsbuildinfo",
+    "prettier": "prettier \"**/*.ts\"",
+    "eslint": "eslint . --ext .ts",
+    "lint": "npm run eslint && npm run prettier -- --check",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "prepack": "yarn build && oclif manifest && oclif readme",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif readme && git add README.md",
+    "prepare": "husky install",
+    "release": "semantic-release"
+  },
   "keywords": [
     "capacitorjs",
     "capacitor",
@@ -15,68 +29,80 @@
     "ios",
     "ionic"
   ],
-  "scripts": {
-    "prepare": "husky install",
-    "prepack": "rm -rf lib && tsc -b",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "lint": "eslint . --ext .ts --config .eslintrc",
-    "version": "oclif-dev readme && git add README.md"
-  },
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
   "files": [
     "/bin",
-    "/lib"
+    "/dist",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
   ],
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=14.0.0"
   },
   "bin": {
     "capacitor-set-version": "./bin/run"
   },
   "oclif": {
+    "bin": "capacitor-set-version",
+    "dirname": "capacitor-set-version",
+    "commands": "./dist/commands",
+    "default": "set",
+    "topicSeparator": ":",
+    "topics": {
+      "set": {
+        "description": "Set Version and Build Number for Android and iOS projects"
+      }
+    },
     "plugins": [
       "@oclif/plugin-help",
-      "@oclif/plugin-not-found"
-    ],
-    "bin": "capacitor-set-version"
+      "@oclif/plugin-plugins",
+      "@oclif/plugin-version",
+      "@oclif/plugin-commands",
+      "@oclif/plugin-autocomplete"
+    ]
   },
   "dependencies": {
-    "@oclif/command": "^1.8.0",
-    "@oclif/config": "^1.17.0",
-    "@oclif/plugin-help": "^3.2.2",
-    "@oclif/plugin-not-found": "^2.3.1",
-    "plist": "^3.0.2",
-    "semver": "^7.3.5",
-    "tslib": "^2.2.0"
+    "@oclif/core": "^1",
+    "@oclif/plugin-autocomplete": "^1.3.0",
+    "@oclif/plugin-commands": "^2.1.0",
+    "@oclif/plugin-help": "^5",
+    "@oclif/plugin-plugins": "^2.1.0",
+    "@oclif/plugin-version": "^1.0.4",
+    "plist": "^3.0.5",
+    "semver": "^7.3.7",
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.1.1",
-    "@commitlint/config-conventional": "^12.1.1",
-    "@oclif/dev-cli": "^1.26.0",
-    "@oclif/test": "^1.2.8",
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/git": "^9.0.0",
-    "@semantic-release/github": "^7.2.1",
-    "@types/chai": "^4.2.16",
-    "@types/mocha": "^9.1.0",
-    "@types/mock-fs": "^4.13.0",
-    "@types/node": "^16.11.13",
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@oclif/test": "^2",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.4",
+    "@types/chai": "^4",
+    "@types/mocha": "^9.0.0",
+    "@types/mock-fs": "^4.13.1",
+    "@types/node": "^16.9.4",
     "@types/plist": "^3.0.2",
-    "@types/semver": "^7.3.4",
-    "@typescript-eslint/eslint-plugin": "^4.21.0",
-    "@typescript-eslint/parser": "^4.21.0",
-    "chai": "^4.3.4",
-    "eslint": "^7.23.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
+    "@types/semver": "^7.3.9",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
+    "chai": "^4",
+    "eslint": "^7.32.0",
+    "eslint-config-oclif": "^4",
+    "eslint-config-oclif-typescript": "^1.0.2",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "globby": "^11.1.0",
     "husky": "^7.0.4",
-    "mocha": "^5.2.0",
-    "mock-fs": "^5.0.0",
+    "mocha": "^9",
+    "mock-fs": "^5.1.2",
     "nyc": "^15.1.0",
-    "prettier": "^2.2.1",
-    "semantic-release": "^17.4.2",
-    "ts-node": "^10.0.0",
-    "typescript": "^4.2.4"
+    "oclif": "^2",
+    "prettier": "^2.6.2",
+    "semantic-release": "^19.0.2",
+    "shx": "^0.3.3",
+    "ts-node": "^10.2.1",
+    "tslib": "^2.3.1",
+    "typescript": "~4.4.3"
   }
 }
