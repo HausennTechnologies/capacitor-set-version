@@ -1,5 +1,15 @@
 CHANGES:
 
+# [2.0.0](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.3.37...v2.0.0) (2022-05-18)
+
+
+* feat/v2.0.0 (#208) ([eadd6ae](https://github.com/HausennTechnologies/capacitor-set-version/commit/eadd6aef88e3079400d9f7325854969fd78ebe97)), closes [#208](https://github.com/HausennTechnologies/capacitor-set-version/issues/208)
+
+
+### BREAKING CHANGES
+
+* this version is not backward compatible with 1.x
+
 ## [1.3.37](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.3.36...v1.3.37) (2022-03-02)
 
 ## [1.3.36](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.3.35...v1.3.36) (2022-02-08)
