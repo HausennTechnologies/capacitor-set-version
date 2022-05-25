@@ -1,5 +1,12 @@
 CHANGES:
 
+## [2.0.1](https://github.com/HausennTechnologies/capacitor-set-version/compare/v2.0.0...v2.0.1) (2022-05-25)
+
+
+### Bug Fixes
+
+* cfbundleversion as string for legacy ios projects ([1f0977c](https://github.com/HausennTechnologies/capacitor-set-version/commit/1f0977c469985afd6ee34975a18e53342d26e2c0))
+
 # [2.0.0](https://github.com/HausennTechnologies/capacitor-set-version/compare/v1.3.37...v2.0.0) (2022-05-18)
 
 
