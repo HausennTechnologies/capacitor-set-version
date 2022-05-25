@@ -1,6 +1,8 @@
 import { VersionInfo } from '../../../src/common/version-info.type';
 import MockFsFactory from '../../mockfs/mockfs.factory';
 
+import * as fs from 'fs';
+
 const versionInfo: VersionInfo = {
   version: '1.5.0-rc1',
   build: 150,
@@ -217,5 +219,18 @@ describe('when capacitor-set-version is called', () => {
         expect(err.message).to.contain('Could not find "CURRENT_PROJECT_VERSION" in project.pbxproj file');
       })
       .it('should error');
+  });
+
+  describe('for legacy ios project,', () => {
+    test
+      .command(['set:ios', '-v', versionInfo.version, '-b', versionInfo.build.toString(), MockFsFactory.DIR_IOS_LEGACY])
+      .it('should set CFBundleVersion with type string (#215)', () => {
+        const expectedCFBundleVersion = '<string>150</string>';
+        const infoPlistFile = fs
+          .readFileSync(MockFsFactory.DIR_IOS_LEGACY + '/ios/App/App/Info.plist')
+          .toString('utf8');
+
+        expect(infoPlistFile).to.contain(expectedCFBundleVersion);
+      });
   });
 });
