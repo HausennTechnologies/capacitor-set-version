@@ -124,5 +124,5 @@ function setIOSVersionLegacy(infoPlist: any, version: string) {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function setIOSBuildLegacy(infoPlist: any, build: number) {
-  infoPlist.CFBundleVersion = build;
+  infoPlist.CFBundleVersion = build.toString();
 }
