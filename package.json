@@ -68,7 +68,7 @@
     "@oclif/plugin-plugins": "^2.1.0",
     "@oclif/plugin-version": "^1.1.1",
     "plist": "^3.0.6",
-    "semver": "^7.3.7",
+    "semver": "^7.3.8",
     "tslib": "^2.4.0"
   },
   "devDependencies": {
