@@ -98,7 +98,7 @@
     "mock-fs": "^5.2.0",
     "nyc": "^15.1.0",
     "oclif": "^2",
-    "prettier": "^2.8.0",
+    "prettier": "^2.8.4",
     "semantic-release": "^19.0.5",
     "shx": "^0.3.3",
     "ts-node": "^10.9.1",
