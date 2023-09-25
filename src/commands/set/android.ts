@@ -7,7 +7,7 @@ export default class SetAndroid extends CustomCommand {
   static description = 'Set android version and build number';
   static examples = ['<%= config.bin %> <%= command.id %> /project/path -v 1.0.0-rc1 -b 10'];
 
-  static args = [...CustomCommand.args];;
+  static args = [...CustomCommand.args];
   static flags = { ...CustomCommand.flags };
 
   public async run(): Promise<VersionInfo> {
