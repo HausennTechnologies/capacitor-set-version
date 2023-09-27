@@ -1,5 +1,12 @@
 CHANGES:
 
+# [2.1.0](https://github.com/HausennTechnologies/capacitor-set-version/compare/v2.0.13...v2.1.0) (2023-09-27)
+
+
+### Features
+
+* fix check for capacitor config ([42c9eac](https://github.com/HausennTechnologies/capacitor-set-version/commit/42c9eac0b00e555ef7ff9e257a4c4133a18e1ac1))
+
 ## [2.0.13](https://github.com/HausennTechnologies/capacitor-set-version/compare/v2.0.12...v2.0.13) (2022-12-07)
 
 ## [2.0.12](https://github.com/HausennTechnologies/capacitor-set-version/compare/v2.0.11...v2.0.12) (2022-12-07)
