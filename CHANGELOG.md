@@ -1,5 +1,12 @@
 CHANGES:
 
+# [2.2.0](https://github.com/HausennTechnologies/capacitor-set-version/compare/v2.1.0...v2.2.0) (2023-09-27)
+
+
+### Features
+
+* **kotlin support:** add support for kotlin DSL ([60239e0](https://github.com/HausennTechnologies/capacitor-set-version/commit/60239e0a7cd8e92d90009c689d713756ca78d2e7))
+
 # [2.1.0](https://github.com/HausennTechnologies/capacitor-set-version/compare/v2.0.13...v2.1.0) (2023-09-27)
 
 
