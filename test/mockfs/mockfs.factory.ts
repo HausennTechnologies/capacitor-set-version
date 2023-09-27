@@ -6,9 +6,12 @@ export default class MockFsFactory {
   static DIR_NO_PROJECT = 'no_project';
   static DIR_NO_DIRECTORY = 'no_directory';
   static DIR_NO_ANDROID = 'no_android';
+  static DIR_ANDROID_KOTLIN = 'android_kotlin'
   static DIR_NO_BUILD_GRADLE = 'no_build_gradle';
   static DIR_NO_BUILD_GRADLE_VERSION = 'no_build_gradle_version';
-  static DIR_NO_BUILD_GRADLE_BUILD = 'no_build_gradle_build';
+  static DIR_NO_BUILD_GRADLE_VERSION_KOTLIN = 'no_build_gradle_version';
+  static DIR_NO_BUILD_GRADLE_BUILD = 'no_build_gradle_build_kotlin';
+  static DIR_NO_BUILD_GRADLE_BUILD_KOTLIN = 'no_build_gradle_build_kotlin';
   static DIR_NO_IOS = 'no_ios';
   static DIR_IOS_LEGACY = 'ios_legacy';
   static DIR_IOS_NO_INFO_PLIST = 'ios_no_info_plist';
@@ -51,6 +54,14 @@ export default class MockFsFactory {
           },
         },
       },
+      'android_kotlin': {
+        'capacitor.config.ts': mockfs.load(resolve(__dirname, '../mockfs/capacitor.config.ts')),
+        'android': {
+          app: {
+            'build.gradle': mockfs.load(resolve(__dirname, '../mockfs/build.gradle.kts')),
+          },
+        },
+      },
       'no_build_gradle': {
         'capacitor.config.ts': mockfs.load(resolve(__dirname, '../mockfs/capacitor.config.ts')),
         'android': {
@@ -65,11 +76,27 @@ export default class MockFsFactory {
           },
         },
       },
+      'no_build_gradle_version_kotlin': {
+        'capacitor.config.ts': mockfs.load(resolve(__dirname, '../mockfs/capacitor.config.ts')),
+        'android': {
+          app: {
+            'build.gradle': mockfs.load(resolve(__dirname, '../mockfs/build.gradle.kts.no-version')),
+          },
+        },
+      },
       'no_build_gradle_build': {
         'capacitor.config.ts': mockfs.load(resolve(__dirname, '../mockfs/capacitor.config.ts')),
         'android': {
           app: {
             'build.gradle': mockfs.load(resolve(__dirname, '../mockfs/build.gradle.no-build')),
+          },
+        },
+      },
+      'no_build_gradle_build_kotlin': {
+        'capacitor.config.ts': mockfs.load(resolve(__dirname, '../mockfs/capacitor.config.ts')),
+        'android': {
+          app: {
+            'build.gradle': mockfs.load(resolve(__dirname, '../mockfs/build.gradle.kts.no-build')),
           },
         },
       },

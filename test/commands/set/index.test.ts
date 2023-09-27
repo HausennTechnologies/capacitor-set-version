@@ -87,6 +87,17 @@ describe('when capacitor-set-version is called', () => {
       .it('should error');
   });
 
+  describe('for android project with build.gradle.kts', () => {
+    test
+      .stdout()
+      .stderr()
+      .command(['set', '-v', versionInfo.version, '-b', versionInfo.build.toString(), MockFsFactory.DIR_ANDROID_KOTLIN])
+      .it('should set the android version', ctx => {
+        expect(ctx.stdout).to.be.empty;
+        expect(ctx.stderr).to.be.empty;
+      })
+  });
+
   describe('for android project without build.gradle file', () => {
     test
       .command([
@@ -114,7 +125,23 @@ describe('when capacitor-set-version is called', () => {
         MockFsFactory.DIR_NO_BUILD_GRADLE_VERSION,
       ])
       .catch(err => {
-        expect(err.message).to.contain('Could not find "versionName" in android/app/build.grade file');
+        expect(err.message).to.contain('Could not find "versionName" in android/app/build.grade(.kts) file');
+      })
+      .it('should error');
+  });
+
+  describe('for android project without build.gradle.kts version', () => {
+    test
+      .command([
+        'set',
+        '-v',
+        versionInfo.version,
+        '-b',
+        versionInfo.build.toString(),
+        MockFsFactory.DIR_NO_BUILD_GRADLE_VERSION_KOTLIN,
+      ])
+      .catch(err => {
+        expect(err.message).to.contain('Could not find "versionName" in android/app/build.grade(.kts) file');
       })
       .it('should error');
   });
@@ -130,7 +157,23 @@ describe('when capacitor-set-version is called', () => {
         MockFsFactory.DIR_NO_BUILD_GRADLE_BUILD,
       ])
       .catch(err => {
-        expect(err.message).to.contain('Could not find "versionCode" in android/app/build.grade file');
+        expect(err.message).to.contain('Could not find "versionCode" in android/app/build.grade(.kts) file');
+      })
+      .it('should error');
+  });
+
+  describe('for android project without build.gradle.kts build', () => {
+    test
+      .command([
+        'set',
+        '-v',
+        versionInfo.version,
+        '-b',
+        versionInfo.build.toString(),
+        MockFsFactory.DIR_NO_BUILD_GRADLE_BUILD_KOTLIN,
+      ])
+      .catch(err => {
+        expect(err.message).to.contain('Could not find "versionCode" in android/app/build.grade(.kts) file');
       })
       .it('should error');
   });
